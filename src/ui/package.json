@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "parcel watch templates/*.html --out-dir ../../resources/build --public-url /static",
-    "build": "parcel build templates/*.html --public-url /static --no-source-maps"
+    "build": "(rm -r dist || true) && parcel build templates/*.html --public-url /static --no-source-maps"
   },
   "devDependencies": {
     "autoprefixer": "^9",
