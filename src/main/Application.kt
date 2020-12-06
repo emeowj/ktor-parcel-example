@@ -9,6 +9,7 @@ import com.github.mustachejava.DefaultMustacheFactory
 import io.ktor.mustache.Mustache
 import io.ktor.mustache.MustacheContent
 import io.ktor.content.*
+import io.ktor.features.*
 import io.ktor.http.content.*
 
 fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
@@ -18,6 +19,13 @@ fun main(args: Array<String>): Unit = io.ktor.server.netty.EngineMain.main(args)
 fun Application.module(testing: Boolean = false) {
     install(Mustache) {
         mustacheFactory = DefaultMustacheFactory("build")
+    }
+
+    install(CallLogging) {}
+    install(StatusPages) {
+        status(HttpStatusCode.NotFound) {
+            call.respond(MustacheContent("404.hbs.html", mapOf("uri" to call.request.uri)))
+        }
     }
 
     routing {

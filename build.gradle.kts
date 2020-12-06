@@ -49,3 +49,4 @@ tasks.withType<Jar> {
         )
     }
 }
+
